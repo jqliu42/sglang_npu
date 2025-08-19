@@ -55,7 +55,6 @@ def moe_forward_native(
     no_combine: bool = False,
     routed_scaling_factor: Optional[float] = None,
 ) -> torch.Tensor:
-    # this is a test log
     if apply_router_weight_on_input:
         raise NotImplementedError()
 
