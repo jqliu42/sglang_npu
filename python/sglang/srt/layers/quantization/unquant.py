@@ -372,7 +372,6 @@ class UnquantizedFusedMoEMethod(FusedMoEMethodBase, CustomOp):
         w13 = layer.w13_weight.transpose(1,2)
         w2 = layer.w2_weight.transpose(1,2)
         # gmm1: gate_up_proj
-        hidden_states, pertoken_scale = torch_npu.npu_dynamic_quant(hidden_states)
         hidden_states = torch_npu.npu_grouped_matmul(
             x=[hidden_states],
             weight=[w13],
