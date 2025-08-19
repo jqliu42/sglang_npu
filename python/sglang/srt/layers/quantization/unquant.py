@@ -362,7 +362,7 @@ class UnquantizedFusedMoEMethod(FusedMoEMethodBase, CustomOp):
         )
         hidden_states, expanded_row_idx, expanded_expert_idx = (
             torch_npu.npu_moe_init_routing(
-                hidden_states, row_idx=row_idx, expert_idx=topk_ids, active_num=num_tokens
+                x, row_idx=row_idx, expert_idx=topk_ids, active_num=num_tokens
             )
         )
         expert_tokens = torch_npu.npu_moe_compute_expert_tokens(
