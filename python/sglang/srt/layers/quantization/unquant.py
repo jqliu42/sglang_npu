@@ -345,7 +345,6 @@ class UnquantizedFusedMoEMethod(FusedMoEMethodBase, CustomOp):
     ) -> torch.Tensor:
         import torch_npu
 
-        original_shape = x.shape
         original_dtype = x.dtype
         num_tokens = x.shape[0]
         topk_weights, topk_ids, _ = topk_output
@@ -386,7 +385,7 @@ class UnquantizedFusedMoEMethod(FusedMoEMethodBase, CustomOp):
             hidden_states = torch_npu.npu_swiglu(hidden_states)
         else:
             from sglang.srt.layers.activation import GeluAndMul
-            hidden_states = GeluAndMul(hidden_states)
+            hidden_states = GeluAndMul()(hidden_states)
 
         # gmm2: down_proj
         hidden_states = torch_npu.npu_grouped_matmul(
